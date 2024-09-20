@@ -149,11 +149,3 @@ def deletePatient(request, pk):
     patient = Patient.objects.get(Patient_ID=pk)
     patient.delete()
     return Response('Patient deleted')
-
-
-
-
-
-
-
-
