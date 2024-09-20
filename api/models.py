@@ -12,7 +12,7 @@ class User(models.Model):
     Username = models.CharField(max_length=255)
     Role = models.CharField(max_length=255)
     Email = models.EmailField()
-    Password = models.BigIntegerField()
+    Password = models.CharField(max_length=255)
     NIC = models.CharField(max_length=20)
     Device_ID = models.CharField(max_length=255)
     Birthday = models.DateField()
