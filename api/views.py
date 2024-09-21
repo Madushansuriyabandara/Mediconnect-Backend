@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404
 from .dtos import *
 from .models import *
 from .serializers import *
+import uuid
+import random
 
 @api_view(['GET'])
 def getRoutes(request):
@@ -61,8 +63,9 @@ def getUsers(request):
 @api_view(['POST'])
 def createUser(request):
     data = request.data
+    user_id = random.randint(1, 1000000)
     user = User.objects.create(
-        User_ID = data['User_ID'],
+        User_ID = user_id,
         Username = data['Username'],
         Role = data['Role'],
         Email = data['Email'],
