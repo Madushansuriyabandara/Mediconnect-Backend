@@ -1,10 +1,10 @@
-# from rest_framework.decorators import api_view
-# from rest_framework.response import Response
-# from django.http import JsonResponse
-# from django.shortcuts import get_object_or_404
-# from .dtos import *
-# from .models import *
-# from .serializers import *
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from .dtos import *
+from .models import *
+from .serializers import *
 
 # @api_view(['GET'])
 # def getRoutes(request):
@@ -80,18 +80,21 @@
 #     )
 #     return Response('Patient created')
 
-# @api_view(['GET'])
-# def getPatientById(request, pk):
-#     patient = Patient.objects.get(Patient_ID=pk)
-#     patientDto = PatientDTO(
-#         User_ID = patient.User_ID.User_ID,
-#         Patient_ID = patient.Patient_ID,
-#         Breakfast_time = patient.Breakfast_time,
-#         Lunch_time = patient.Lunch_time,
-#         Dinner_time = patient.Dinner_time,
-#     )
-#     serializer = PatientDTOSerializer(patientDto, many=False)
-#     return Response(serializer.data)
+from api.dtos import PatientDTO
+
+
+@api_view(['GET'])
+def getPatientById(request, pk):
+    patient = Patient.objects.get(Patient_ID=pk)
+    patientDto = PatientDTO(
+        User_ID = patient.User_ID.User_ID,
+        Patient_ID = patient.Patient_ID,
+        Breakfast_time = patient.Breakfast_time,
+        Lunch_time = patient.Lunch_time,
+        Dinner_time = patient.Dinner_time,
+    )
+    serializer = PatientDTOSerializer(patientDto, many=False)
+    return Response(serializer.data)
 
 # @api_view(['PUT'])
 # def updatePatient(request, pk):
@@ -354,7 +357,7 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from .models import User, Patient, Doctor, Hospital, Schedule, Appointment, Prescription, Medicine, NoteUser, Note
-from .serializers import UserSerializer, PatientSerializer, DoctorSerializer, HospitalSerializer, ScheduleSerializer, AppointmentSerializer, PrescriptionSerializer, MedicineSerializer, NoteUserSerializer, NoteSerializer
+from .serializers import PatientDTOSerializer, UserSerializer, PatientSerializer, DoctorSerializer, HospitalSerializer, ScheduleSerializer, AppointmentSerializer, PrescriptionSerializer, MedicineSerializer, NoteUserSerializer, NoteSerializer
 import jwt
 import datetime
 import random
