@@ -80,7 +80,7 @@ from .serializers import *
 #     )
 #     return Response('Patient created')
 
-from api.dtos import PatientDTO
+from mediconnect_app.dtos import PatientDTO
 
 
 @api_view(['GET'])

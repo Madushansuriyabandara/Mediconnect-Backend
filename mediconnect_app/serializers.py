@@ -7,7 +7,7 @@
 
 from rest_framework import serializers
 
-from api.dtos import PatientDTO
+from mediconnect_app.dtos import PatientDTO
 from .models import User, Patient, Doctor, Hospital, Schedule, Appointment, Prescription, Medicine, Note, NoteUser
 
 class UserSerializer(serializers.ModelSerializer):

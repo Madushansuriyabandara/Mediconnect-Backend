@@ -70,8 +70,8 @@ class Migration(migrations.Migration):
             name='QUEUEDOCHOS',
             fields=[
                 ('Queue_ID', models.BigAutoField(primary_key=True, serialize=False)),
-                ('Doctor_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.doctor')),
-                ('Hospital_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.hospital')),
+                ('Doctor_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.doctor')),
+                ('Hospital_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.hospital')),
             ],
         ),
         migrations.CreateModel(
@@ -92,7 +92,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Pharmacy',
             fields=[
-                ('Medicine_ID', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='api.medicine')),
+                ('Medicine_ID', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='mediconnect_app.medicine')),
                 ('Interval', models.CharField(max_length=255)),
                 ('Times_per_day', models.IntegerField()),
                 ('Monday', models.BooleanField(default=False)),
@@ -111,15 +111,15 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='medicine',
             name='Prescription_ID',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.prescription'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.prescription'),
         ),
         migrations.CreateModel(
             name='Report',
             fields=[
                 ('Report_ID', models.BigAutoField(primary_key=True, serialize=False)),
                 ('Report', models.TextField()),
-                ('Patient_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.patient')),
-                ('Prescription_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.prescription')),
+                ('Patient_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.patient')),
+                ('Prescription_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.prescription')),
             ],
         ),
         migrations.CreateModel(
@@ -136,8 +136,8 @@ class Migration(migrations.Migration):
                 ('Friday', models.BooleanField(default=False)),
                 ('Saturday', models.BooleanField(default=False)),
                 ('Sunday', models.BooleanField(default=False)),
-                ('Doctor_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.doctor')),
-                ('Hospital_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.hospital')),
+                ('Doctor_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.doctor')),
+                ('Hospital_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.hospital')),
             ],
         ),
         migrations.CreateModel(
@@ -145,31 +145,31 @@ class Migration(migrations.Migration):
             fields=[
                 ('Session_ID', models.BigAutoField(primary_key=True, serialize=False)),
                 ('Diagnosis', models.CharField(max_length=255)),
-                ('Doctor_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.doctor')),
-                ('Patient_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.patient')),
+                ('Doctor_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.doctor')),
+                ('Patient_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.patient')),
             ],
         ),
         migrations.AddField(
             model_name='prescription',
             name='Session_ID',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.session'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.session'),
         ),
         migrations.AddField(
             model_name='patient',
             name='User_ID',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='api.user'),
+            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.user'),
         ),
         migrations.CreateModel(
             name='NoteUser',
             fields=[
                 ('Notification_ID', models.BigAutoField(primary_key=True, serialize=False)),
-                ('User_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.user')),
+                ('User_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.user')),
             ],
         ),
         migrations.AddField(
             model_name='doctor',
             name='User_ID',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='api.user'),
+            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.user'),
         ),
         migrations.CreateModel(
             name='DocRecord',
@@ -181,8 +181,8 @@ class Migration(migrations.Migration):
                 ('Patients_attended', models.IntegerField()),
                 ('Current_token_no', models.IntegerField()),
                 ('Average_time', models.TimeField()),
-                ('Doctor_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.doctor')),
-                ('Hospital_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.hospital')),
+                ('Doctor_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.doctor')),
+                ('Hospital_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.hospital')),
             ],
             options={
                 'unique_together': {('Doctor_ID', 'Hospital_ID')},
@@ -193,8 +193,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('Note', models.TextField()),
-                ('Hospital_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.hospital')),
-                ('Patient_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.patient')),
+                ('Hospital_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.hospital')),
+                ('Patient_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.patient')),
             ],
             options={
                 'unique_together': {('Hospital_ID', 'Patient_ID')},
@@ -203,9 +203,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Queue',
             fields=[
-                ('Queue_ID', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='api.queuedochos')),
+                ('Queue_ID', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='mediconnect_app.queuedochos')),
                 ('Token_no', models.IntegerField(unique=True)),
-                ('Patient_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.patient')),
+                ('Patient_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.patient')),
             ],
             options={
                 'unique_together': {('Queue_ID', 'Patient_ID')},
@@ -219,11 +219,11 @@ class Migration(migrations.Migration):
                 ('End_time', models.TimeField()),
                 ('Status', models.CharField(max_length=255)),
                 ('Date', models.DateField()),
-                ('Doctor_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.doctor')),
-                ('Hospital_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.hospital')),
-                ('Patient_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.patient')),
-                ('Session_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.session')),
-                ('Token_no', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.queue', to_field='Token_no')),
+                ('Doctor_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.doctor')),
+                ('Hospital_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.hospital')),
+                ('Patient_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.patient')),
+                ('Session_ID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.session')),
+                ('Token_no', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mediconnect_app.queue', to_field='Token_no')),
             ],
         ),
     ]
