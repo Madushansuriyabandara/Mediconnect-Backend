@@ -39,4 +39,9 @@ urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('patients/<str:pk>/',views.getPatientById),
+    path('users/login/', views.login_user, name='login_user'),
+    # Google login
+    path('users/google-login/', views.google_login, name='google_login'),
+    # Facebook login
+    path('users/facebook-login/', views.facebook_login, name='facebook_login'),
 ]
