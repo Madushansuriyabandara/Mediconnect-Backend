@@ -691,7 +691,8 @@ def login_view(request):
 @api_view(['POST'])
 def google_login_view(request):
     token = request.data.get('token')
-    # Verify the Google token
+    # Verify the 
+    #  token
     response = request.get(f'https://oauth2.googleapis.com/tokeninfo?id_token={token}')
     
     if response.status_code == 200:

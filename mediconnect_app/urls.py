@@ -41,7 +41,7 @@ urlpatterns = [
     path('patients/<str:pk>/',views.getPatientById),
     path('users/login/', views.login_user, name='login_user'),
     # Google login
-    path('users/google-login/', views.google_login, name='google_login'),
+    path('users/google-login/', views.google_login_view, name='google_login'),
     # Facebook login
-    path('users/facebook-login/', views.facebook_login, name='facebook_login'),
+    path('users/facebook-login/', views.facebook_login_view, name='facebook_login'),
 ]
