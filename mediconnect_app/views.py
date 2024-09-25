@@ -362,6 +362,9 @@ import jwt
 import datetime
 import random
 import string
+from django.contrib.auth import authenticate
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
 
 def generate_token():
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
@@ -671,3 +674,39 @@ def get_user_notes(request):
     serializer = NoteSerializer(notes, many=True)
     return Response(serializer.data)
 
+
+@api_view(['POST'])
+def login_view(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+    user = authenticate(username=email, password=password)
+    
+    if user is not None:
+        # Return success response
+        return JsonResponse({'message': 'Login successful'}, status=200)
+    else:
+        # Invalid credentials
+        return JsonResponse({'message': 'Invalid credentials'}, status=401)
+
+@api_view(['POST'])
+def google_login_view(request):
+    token = request.data.get('token')
+    # Verify the Google token
+    response = request.get(f'https://oauth2.googleapis.com/tokeninfo?id_token={token}')
+    
+    if response.status_code == 200:
+        # Token is valid
+        return JsonResponse({'message': 'Google login successful'}, status=200)
+    else:
+        return JsonResponse({'message': 'Google login failed'}, status=400)
+
+@api_view(['POST'])
+def facebook_login_view(request):
+    token = request.data.get('token')
+    # Verify the Facebook token
+    response = request.get(f'https://graph.facebook.com/me?access_token={token}')
+    
+    if response.status_code == 200:
+        return JsonResponse({'message': 'Facebook login successful'}, status=200)
+    else:
+        return JsonResponse({'message': 'Facebook login failed'}, status=400)
