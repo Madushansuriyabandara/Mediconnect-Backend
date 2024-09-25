@@ -3,6 +3,9 @@ from . import views
 
 urlpatterns = [
     path('',views.getRoutes),
+
+    path('login/', views.login_user),
+
     path('users/',views.getUsers),
     path('users/create/',views.createUser),
     path('users/<str:pk>/',views.getUserById),
@@ -14,4 +17,5 @@ urlpatterns = [
     path('patients/<str:pk>/',views.getPatientById),
     path('patients/<str:pk>/update/',views.updatePatient),
     path('patients/<str:pk>/delete/',views.deletePatient),
+
 ]

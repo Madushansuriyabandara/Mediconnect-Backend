@@ -152,3 +152,13 @@ def deletePatient(request, pk):
     patient = Patient.objects.get(Patient_ID=pk)
     patient.delete()
     return Response('Patient deleted')
+
+
+@api_view(['POST'])
+def login_user(request):
+    data = request.data
+    user = User.objects.get(Email=data['Email'])
+    if str(user.Password) == data['Password']:
+        return Response('Login successful')
+    else:
+        return Response('Login failed')
